@@ -1,5 +1,7 @@
 # Imports
+import numpy as np
 import sympy as sp
+import matplotlib.pyplot as plt
 
 # Initialize variables
 x = sp.Symbol('x')
@@ -8,14 +10,6 @@ obj = x - 1
 xBounds = (-5, 5)
 xStep = 0.1
 decPlaces = 4
-
-# Custom range method to support floats
-def fRange(start, stop, increment):
-    out = []
-    while start <= stop:
-        out += [start]
-        start += increment
-    return out
 
 # Approximate function zeros using Householder's method
 def householderZeros(func, var, guess, order, epochs):
@@ -38,10 +32,10 @@ def norm(func, var, pt):
 def reflect(pt, center):
     return 2 * center - pt
 
-ptsMir = fRange(xBounds[0], xBounds[1], xStep)
-ptsObj = [householderZeros(norm(mir, x, ptMir) - obj, x, 4, 1, 8) for ptMir in ptsMir]
-ptsRefl = [reflect(ptObj, ptMir) for ptObj, ptMir in zip(ptsObj, ptsMir)]
+ptsMir = [float(ptMir) for ptMir in np.arange(xBounds[0], xBounds[1] + xStep, xStep)]
+ptsObj = [sp.solve(norm(mir, x, ptMir) - obj) for ptMir in ptsMir]
+ptsRefl = [reflect(ptObj[0], ptMir) for ptObj, ptMir in zip(ptsObj, ptsMir)]
 
-print('ptsMir:', ptsMir)
-print('ptsObj:', ptsObj)
-print('ptsRefl:', ptsRefl)
+print('ptsMir:', ptsMir, '\n')
+print('ptsObj:', ptsObj, '\n')
+print('ptsRefl:', ptsRefl, '\n')
