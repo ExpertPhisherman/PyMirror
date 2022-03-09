@@ -3,9 +3,11 @@ import numpy as np
 import sympy as sp
 import matplotlib.pyplot as plt
 
+# Convert list items to float
 def floatList(myList):
     return [float(i) for i in myList]
 
+# Flatten list
 def flatten(myList):
     try:
         return [i for subList in myList for i in subList]
