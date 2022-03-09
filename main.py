@@ -3,6 +3,9 @@ import numpy as np
 import sympy as sp
 import matplotlib.pyplot as plt
 
+def floatList(myList):
+    return [float(i) for i in myList]
+
 # Initialize variables
 x = sp.Symbol('x')
 mir = 2 * x + 1
@@ -21,7 +24,6 @@ def householderZeros(func, var, guess, order, epochs):
             break
         else:
             guess = guessOld
-        #print(guess)
     return guess
 
 # Normal line to function at a point
@@ -32,7 +34,7 @@ def norm(func, var, pt):
 def reflect(pt, center):
     return 2 * center - pt
 
-ptsMir = [float(ptMir) for ptMir in np.arange(xBounds[0], xBounds[1] + xStep, xStep)]
+ptsMir = np.arange(xBounds[0], xBounds[1] + xStep, xStep)
 ptsObj = [sp.solve(norm(mir, x, ptMir) - obj) for ptMir in ptsMir]
 ptsRefl = [reflect(ptObj[0], ptMir) for ptObj, ptMir in zip(ptsObj, ptsMir)]
 
