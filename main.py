@@ -54,6 +54,6 @@ print('ptsObj:', ptsObj, '\n')
 print('ptsMir:', ptsMir, '\n')
 print('ptsRefl:', ptsRefl, '\n')
 
-print(len(ptsObj), '\n')
+'''print(len(ptsObj), '\n')
 print(len(ptsMir), '\n')
-print(len(ptsRefl), '\n')
+print(len(ptsRefl), '\n')'''
