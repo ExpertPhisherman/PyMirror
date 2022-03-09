@@ -6,6 +6,12 @@ import matplotlib.pyplot as plt
 def floatList(myList):
     return [float(i) for i in myList]
 
+def flatten(myList):
+    try:
+        return [i for subList in myList for i in subList]
+    except:
+        return myList
+
 # Initialize variables
 x = sp.Symbol('x')
 mir = 2 * x + 1
@@ -38,6 +44,14 @@ ptsMir = np.arange(xBounds[0], xBounds[1] + xStep, xStep)
 ptsObj = [sp.solve(norm(mir, x, ptMir) - obj) for ptMir in ptsMir]
 ptsRefl = [reflect(ptObj[0], ptMir) for ptObj, ptMir in zip(ptsObj, ptsMir)]
 
-print('ptsMir:', ptsMir, '\n')
+ptsMir = floatList(flatten(ptsMir))
+ptsObj = floatList(flatten(ptsObj))
+ptsRefl = floatList(flatten(ptsRefl))
+
 print('ptsObj:', ptsObj, '\n')
+print('ptsMir:', ptsMir, '\n')
 print('ptsRefl:', ptsRefl, '\n')
+
+print(len(ptsObj), '\n')
+print(len(ptsMir), '\n')
+print(len(ptsRefl), '\n')
